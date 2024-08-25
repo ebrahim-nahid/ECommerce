@@ -19,10 +19,6 @@ public class CategoryController : Controller
        var categories = await _categoryService.Get();
         return View(categories);
     }
-    //public Task<IActionResult> Detail(int id) 
-    //{
-
-    //}
 
     [HttpGet]
     public IActionResult Create()
@@ -44,5 +40,31 @@ public class CategoryController : Controller
         return View(category);
     }
 
+    [HttpGet]
+    public async Task<IActionResult> Update(int id)
+    {
+        var categoryToUpdate = await _categoryService.Get(id);
+        return View(categoryToUpdate);
+    }
 
+    [HttpPost]
+    public async Task<IActionResult> Update(UpdateCategoryDto updateCategoryDto)
+    {
+        var isScuccess = await _categoryService.Update(updateCategoryDto);
+        if (isScuccess)
+        {
+            return RedirectToAction(nameof(Index));
+        }
+        return View();
+    }
+
+    public async Task<IActionResult> Delete(int id)
+    {
+        var isSuccess = await _categoryService.Delete(id);
+        if (isSuccess)
+        {
+            return RedirectToAction(nameof(Index));
+        }
+        return View();
+    }
 }

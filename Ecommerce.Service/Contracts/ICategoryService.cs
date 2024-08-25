@@ -7,7 +7,7 @@ public interface ICategoryService
 {
     Task<bool> Create(CreateCategoryDto category);
     Task<IReadOnlyList<Category>> Get();
-    Task<Category> Get(int id);
-    Task<bool> Update(Category category);
+    Task<UpdateCategoryDto> Get(int id);
+    Task<bool> Update(UpdateCategoryDto category);
     Task<bool> Delete(int id);
 }

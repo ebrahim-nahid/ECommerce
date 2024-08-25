@@ -41,10 +41,11 @@ public sealed class CategoryRepository : ICategoryRepository
 
     public async Task<bool> Update(Category category)
     {
-        var result = await Get(category.Id);
-        if (result is not null) 
+        var existingCategory = await Get(category.Id);
+        if (existingCategory is not null) 
         {
-            _dbContext.Categories.Update(category);
+            existingCategory.Name = category.Name;
+            existingCategory.Description = category.Description;
             return _dbContext.SaveChanges() > 0;
         }
         return false;
