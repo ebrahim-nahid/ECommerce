@@ -1,0 +1,18 @@
+﻿@model CreateCategoryDto
+@{
+    ViewData["Title"] = "Create Category";
+}
+
+<h3>Create Category</h3>
+
+<form asp-controller="Category" asp-action="Create" method="post">
+    <div class="form-group">
+        <label for="Name">Name</label>
+        <input class="form-control" asp-for="Name" placeholder="Enter your name">
+    </div>
+    <div class="form-group">
+        <label for="Description">Description</label>
+        <input class="form-control" asp-for="Description" placeholder="Enter your description">
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>
