@@ -33,13 +33,27 @@ public class CategoryService : ICategoryService
         return _categoryRepository.Get();
     }
 
-    public async Task<Category> Get(int id)
+    public async Task<UpdateCategoryDto> Get(int id)
     {
-       return await _categoryRepository.Get(id);
+       var category = await _categoryRepository.Get(id);
+
+        var updateCategoryDto = new UpdateCategoryDto()
+        {
+            Id = category.Id,
+            Name = category.Name,
+            Description = category.Description
+        };
+        return updateCategoryDto;
     }
 
-    public async Task<bool> Update(Category category)
+    public async Task<bool> Update(UpdateCategoryDto updateCategoryDto)
     {
+        var category = new Category()
+        {
+            Id= updateCategoryDto.Id,
+            Name = updateCategoryDto.Name,
+            Description = updateCategoryDto.Description
+        };
        return await _categoryRepository.Update(category);
     }
 }
